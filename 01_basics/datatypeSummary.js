@@ -23,4 +23,28 @@ let myObj = {
   age: 25,
 };
 
-console.log(typeofmyObj);
+console.log(typeof myObj);
+
+// ---------------------------------------------------------
+
+// Stack (Primitive);  Heap (Non-Primitive)
+
+let myYoutubeName = "vgCoding";
+let anotherName = myYoutubeName;
+anotherName = "my coding channel";
+
+console.log(myYoutubeName);
+console.log(anotherName);
+// stack is used one by one value is copied
+
+let userOne = {
+  email: "one@gmail.com",
+  upi: "oneUser@ybl",
+};
+
+let userTwo = userOne;
+userTwo.email = "two@gmail.com";
+
+console.log(userOne);
+console.log(userTwo);
+// heap - obj reference is given
