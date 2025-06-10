@@ -4,35 +4,35 @@ let myDate = new Date();
 
 console.log(typeof myDate); // object
 
-// console.log(myDate.toLocaleDateString());
-// // 9/6/2025
+console.log(myDate.toLocaleDateString());
+// 9/6/2025
 
-// console.log(myDate.toDateString());
-// // Mon Jun 09 2025
+console.log(myDate.toDateString());
+// Mon Jun 09 2025
 
-// console.log(myDate.toLocaleString());
-// // 9/6/2025, 12:19:04 pm
+console.log(myDate.toLocaleString());
+// 9/6/2025, 12:19:04 pm
 
-// console.log(myDate.toString());
-// // Mon Jun 09 2025 12:17:17 GMT+0530 (India Standard Time)
+console.log(myDate.toString());
+// Mon Jun 09 2025 12:17:17 GMT+0530 (India Standard Time)
 
-// console.log(myDate.toUTCString());
-// // Mon, 09 Jun 2025 06:49:29 GMT
+console.log(myDate.toUTCString());
+// Mon, 09 Jun 2025 06:49:29 GMT
 
-// console.log(myDate.toTimeString());
-// // 12:19:29 GMT+0530 (India Standard Time)
+console.log(myDate.toTimeString());
+// 12:19:29 GMT+0530 (India Standard Time)
 
-// console.log(myDate);
-// // 2025-06-09T06:47:17.860Z
+console.log(myDate);
+// 2025-06-09T06:47:17.860Z
 
-// console.log(myDate.toISOString());
-// // 2025-06-09T06:47:48.832Z
+console.log(myDate.toISOString());
+// 2025-06-09T06:47:48.832Z
 
-// console.log(myDate.toJSON());
-// // 2025-06-09T06:48:31.840Z
+console.log(myDate.toJSON());
+// 2025-06-09T06:48:31.840Z
 
-// console.log(myDate.toLocaleTimeString());
-// // 12:19:04 pm
+console.log(myDate.toLocaleTimeString());
+// 12:19:04 pm
 
 let myCreatedDate = new Date(2023, 0, 23);
 let myCreatedDate2 = new Date(2023, 0, 23, 5, 20, 15, 30);
