@@ -32,12 +32,12 @@ const obj2 = { 3: "a", 4: "b" };
 // {} => newobj ; obj1,obj2 => source obj
 
 const obj3 = { ...obj1, ...obj2 };
-// console.log(obj3);
+console.log(obj3);
 
-// console.log(Object.keys(tinderUser));
-// console.log(Object.values(tinderUser));
+console.log(Object.keys(tinderUser));
+console.log(Object.values(tinderUser));
 
-// console.log(tinderUser.hasOwnProperty("isLoggedIn"));
+console.log(tinderUser.hasOwnProperty("isLoggedIn"));
 
 // destructuring
 const course = {

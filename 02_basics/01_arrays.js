@@ -21,15 +21,15 @@ myArr.unshift(9);
 // removes the unshift value
 myArr.shift();
 
-// console.log(myArr.includes(9)); //false
-// console.log(myArr.indexOf(9)); // -1
-// console.log(myArr.indexOf(3));
+console.log(myArr.includes(9)); //false
+console.log(myArr.indexOf(9)); // -1
+console.log(myArr.indexOf(3));
 
 // add 2 array
 const newArr = myArr.join();
 
-// console.log(myArr);
-// console.log(newArr); // comes in string type
+console.log(myArr);
+console.log(newArr); // comes in string type
 
 // slice(doesnot manipulate array), splice(manipulates original array)
 

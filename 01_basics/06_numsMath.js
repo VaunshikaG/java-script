@@ -17,13 +17,13 @@ console.log(hunderds.toLocaleString("en-IN"));
 
 // -------------------------------Maths-----------------------------------
 
-// console.log(Math);
-// console.log(Math.abs(-4));
-// console.log(Math.round(3.14));
-// console.log(Math.ceil(6.14));
-// console.log(Math.floor(8.14));
-// console.log(Math.min(4, 2, 6, 8));
-// console.log(Math.max(4, 3, 6, 8));
+console.log(Math);
+console.log(Math.abs(-4));
+console.log(Math.round(3.14));
+console.log(Math.ceil(6.14));
+console.log(Math.floor(8.14));
+console.log(Math.min(4, 2, 6, 8));
+console.log(Math.max(4, 3, 6, 8));
 
 console.log(Math.random());
 console.log(Math.random() * 10);
