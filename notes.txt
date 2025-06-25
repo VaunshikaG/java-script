@@ -1,0 +1,94 @@
+import { jsx } from "react/jsx-runtime";
+
+const container = (
+  <div>
+    <p>lorem</p>
+  </div>
+);
+ReactDOM.render(container, rootElement);
+
+
+functional
+js funs that return jsx
+they use Hooks ( useState, useEffect)
+handled via hooks
+no need of this keyword
+simpler, easir to read and test
+lighter, no instance creation, more efficient
+
+
+class
+es6 classes that extends React.Component
+uses this.state & this.setState
+they use buil-in lifecycle methods
+required to access data
+can become complex with larger components
+slightly heavier due to instance creation
+
+
+controlled
+its state is managed by react
+it uses onChanged and setState to handle changes
+it uses value prop as initial value
+value is accessed by react state/prop
+needs to used when there is smthg to validate, conditionally enable/disable, manipulate input values
+<input value={value} onChanged={handleChange} />
+
+
+
+uncontrolled
+its state is managed by DOM
+DOM handles the changes
+it uses default value prop as initial value
+value is accessed by ref
+used when you need quick access t input values
+<input defaultValue={foo} ref={inputRef} />
+
+
+
+props are inputs to components of react. they can be single valued or objects having set of values that needs to be passed to to components of react during the creation by using named convenction that is similar to html-tag attributes.
+main purpose of props is to provide diff functionalities to components-
+passing data to component, triggering state changes, using this.props.reactProp inside render() method of component
+
+
+
+
+virtual DOM is virtual reprentation of realDOM which is kept inside the memory and is synced with the realDOM by using lib such as ReactDOM. the main diff in virtual adn real DOM objects is that any changed made inside the virual DOM object will not directly reflect in the real DOM
+react uses 2 virtual DOM.one of them is used to store the currect state of objects & other stores the previous state of objects. whenever virtual DOM gets updated, react compares the 2 DOM and gets to know about which objects were updated. after knowing, it only renders the objects in the objects in the realDOM instead of rendering the complete realDOM.
+
+
+
+every rect component has its built-in state object, which handles the behaviour of the component. any changes made in the component leads to re-rendering of the component.
+
+
+
+prop drilling- sometimes there is need to pass data from a higher hierarchy component to a deeply nested component. to pass the data between such components, we pass props from the source component to the next till we reach the deeply nested component.
+
+
+
+any components using lifecycle methods - render phase, inside lifecycle method, inside constructor  are considered as error boundries.
+
+
+
+react hooks are built-in functions that allows users to use state and built-in lifecycle methods within the component. earlier functional components were called as stateless components and only the class components were used for state management and lifecycle methods. the need to change the functional components to class components, whenever the state management and lifecycle methods were to be used, this led to development of react hooks.
+
+
+
+post - creates new resource
+put - updates the existing resource
+patch - partially updates the resource
+
+
+
+useEffect in react is used to perform side effect in react. the side effct are operations that interact with system outside of React's rendering process, such as-
+fetching data from an api, directly updating the DOM.
+
+useEffect(callback, [dependencies]);
+takes 2 arguments
+fun containing side effct logic, array of dependencies that tell when to re-run the effect
+
+
+
+earlier, refs were only limited to class components, but now it can also be accessible to to functional components by using useRef hook in react. it is used for- 
+managig focus, media playback, text selection, interacting with DOM libs with third party.
+
