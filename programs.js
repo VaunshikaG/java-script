@@ -48,18 +48,13 @@ let arr = [2, 4, 6, 8, 9];
 // palindrome "aabaa"
 
 function palindrome(str) {
-  if (str == null) return false;
+  let str2 = str.replace(/[^A-Za-z0-9]/g, "").toLocaleLowerCase();
+  let result = "";
 
-  let str2 = "";
-  for (let i = str.length - 1; i >= 0; i--) {
-    str2 += str[i];
+  for (let i = str2.length - 1; i >= 0; i--) {
+    result += str2[i];
   }
-
-  if (str2 == str) {
-    return true;
-  } else {
-    return false;
-  }
+  return result === str2;
 }
 // console.log(palindrome("ssmss"));
 // -------------------------------------------------------------------------------
@@ -342,7 +337,18 @@ function removeElement(myList, k) {
 let list_1 = [1, [2, [3, 4], 5]];
 
 function flattenList(myList) {
-  return myList.flat(Infinity);
+  // return myList.flat(Infinity);
+
+  let result = [];
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] instanceof Array) {
+      // recursion
+      result = result.concat(flatArray(arr1[i]));
+    } else {
+      result.push(arr1[i]);
+    }
+  }
+  return result;
 }
 // console.log(flattenList(list_1));
 // -------------------------------------------------------------------------------
@@ -378,24 +384,29 @@ let nums = [2, 7, 11, 15];
 let target = 9;
 
 function indices(myList, target) {
-  let sum = 0;
-  let resultArr = [];
   let newList = [];
+  let resultArr = [];
+  let temp = [];
 
-  for (let i = 0; i < nums.length; i++) {
-    if (!newList.includes(nums[i])) {
-      newList.push(nums[i]);
+  for (let i = 0; i < myList.length; i++) {
+    if (!newList.includes(myList[i])) {
+      newList.push(myList[i]);
     }
   }
 
   for (let j = 0; j < newList.length; j++) {
     for (let k = j + 1; k < newList.length; k++) {
       if (newList[j] === target) {
-        resultArr.push(j);
+        temp.push(j);
       } else if (newList[j] + newList[k] === target) {
-        resultArr.push(j);
-        resultArr.push(k);
+        temp.push(j);
+        temp.push(k);
       }
+    }
+
+    if (temp.length != 0) {
+      resultArr.push(temp);
+      temp = [];
     }
   }
 
