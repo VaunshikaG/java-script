@@ -112,13 +112,13 @@ function armstrongNum(myNum) {
 function fibonacci(myNum) {
   let arr = [0, 1];
 
-  for (let i = 0; i < myNum; i++) {
-    arr.push(arr[i] + arr[i + 1]);
+  for (let i = 2; i < myNum; i++) {
+    arr.push(arr[i - 1] + arr[i - 2]);
   }
 
   return arr;
 }
-// console.log(fibonacci(4));
+// console.log(fibonacci(5));
 // -------------------------------------------------------------------------------
 
 // merge 2 arr and sort it
@@ -413,3 +413,43 @@ function indices(myList, target) {
   return resultArr;
 }
 // console.log(indices(nums, target));
+// -------------------------------------------------------------------------------
+
+// give the original properties of array
+// extra property are added using prototype
+
+Array.prototype.extraProperty = "vaun";
+
+const myarr = [1, 2, 3, 4, 5];
+
+for (let a in myarr) {
+  if (myarr.hasOwnProperty(a)) {
+    console.log(a);
+  }
+}
+// -------------------------------------------------------------------------------
+// implement custom forEach fun
+
+// basic lvl
+Array.prototype.customForEachOne = function (callback) {
+  for (let i = 0; i < this.length; i++) {
+    callback(this[i], this);
+  }
+};
+
+// advc lvl
+Array.prototype.customForEachTwo = function (callback, thisCtx) {
+  if (typeof callback !== "function") {
+    throw `this is not a function`;
+  }
+
+  const length = this.length;
+  let i = 0;
+  while (i < length) {
+    if (this.hasOwnProperty) {
+      callback.call(thisCtx, this[i], i, this);
+    }
+    i++;
+  }
+};
+// -------------------------------------------------------------------------------

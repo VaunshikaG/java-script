@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chibi Sticker Collection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+        .sticker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            justify-items: center;
+            margin-top: 24px;
+        }
+        .sticker-item {
+            background-color: #e0f2fe;
+            border-radius: 12px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease-in-out;
+            min-height: 200px;
+        }
+        .sticker-item:hover {
+            transform: translateY(-5px);
+        }
+        .sticker-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: contain;
+            max-height: 150px;
+        }
+        .sticker-item p {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #334155;
+            text-align: center;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 50px auto;
+            display: none;
+        }
+        .loading-spinner.active {
+            display: block;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @media (max-width: 640px) {
+            .sticker-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+            .sticker-item {
+                min-height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Your Chibi Couple Sticker Collection</h1>
+        <div id="stickerGrid" class="sticker-grid"></div>
+        <div class="loading-spinner" id="loadingSpinner"></div>
+    </div>
+
+    <script type="module">
+        const stickerGrid = document.getElementById('stickerGrid');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Sticker prompts
+        const stickerPrompts = [
+            // Male Chibis (6)
+            { gender: "male", expression: "laughing", outfit: "blue and white plaid shirt and dark jeans" },
+            { gender: "male", expression: "angry", outfit: "blue and white plaid shirt and dark jeans" },
+            { gender: "male", expression: "thinking", outfit: "blue and white plaid shirt and dark jeans" },
+            { gender: "male", expression: "sleepy", outfit: "blue and white plaid shirt and dark jeans" },
+            { gender: "male", expression: "winking", outfit: "blue and white plaid shirt and dark jeans" },
+            { gender: "male", expression: "surprised", outfit: "blue and white plaid shirt and dark jeans" },
+            // Female Chibis (6)
+            { gender: "female", expression: "crying", outfit: "light brown textured off-the-shoulder top with puffy sleeves and blue jeans" },
+            { gender: "female", expression: "sulking", outfit: "light brown textured off-the-shoulder top with puffy sleeves and blue jeans" },
+            { gender: "female", expression: "blowing a kiss", outfit: "light brown textured off-the-shoulder top with puffy sleeves and blue jeans" },
+            { gender: "female", expression: "happy", outfit: "light brown textured off-the-shoulder top with puffy sleeves and blue jeans" },
+            { gender: "female", expression: "sad", outfit: "light brown textured off-the-shoulder top with puffy sleeves and blue jeans" },
+            { gender: "female", expression: "excited", outfit: "light brown textured off-the-shoulder top with puffy sleeves and blue jeans" }
+        ];
+
+        const generateSticker = async (stickerInfo) => {
+            let characterDescription = "";
+            if (stickerInfo.gender === "male") {
+                characterDescription = "A chibi character, male, with dark hair, beard, and glasses";
+            } else {
+                characterDescription = "A chibi character, female, with dark curly hair and glasses";
+            }
+
+            const prompt = `${characterDescription}, wearing a ${stickerInfo.outfit}. The character is ${stickerInfo.expression}. High quality, cartoon style, clean lines, white background, sticker art.`;
+
+            const payload = {
+                instances: { prompt: prompt },
+                parameters: { "sampleCount": 1 }
+            };
+
+            const apiKey = ""; 
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error(`API call failed with status ${response.status}: ${response.statusText}. Response body:`, errorText);
+                    return 'https://placehold.co/150x150/cccccc/FF0000?text=API+Error';
+                }
+
+                const result = await response.json();
+
+                if (result.predictions && result.predictions.length > 0 && result.predictions[0].bytesBase64Encoded) {
+                    const imageUrl = `data:image/png;base64,${result.predictions[0].bytesBase64Encoded}`;
+                    return imageUrl;
+                } else {
+                    console.error("Image generation failed. Unexpected result structure:", result);
+                    return 'https://placehold.co/150x150/cccccc/333333?text=Error';
+                }
+            } catch (error) {
+                console.error("Error generating image:", error);
+                return 'https://placehold.co/150x150/cccccc/333333?text=Network+Error';
+            }
+        };
+
+        const loadStickers = async () => {
+            loadingSpinner.classList.add('active'); // Show spinner
+            stickerGrid.innerHTML = ''; // Clear previous stickers
+
+            const stickerPromises = stickerPrompts.map(async (info) => {
+                const imageUrl = await generateSticker(info);
+                return { ...info, imageUrl: imageUrl };
+            });
+
+            const stickers = await Promise.all(stickerPromises);
+
+            loadingSpinner.classList.remove('active'); // Hide spinner
+
+            stickers.forEach(sticker => {
+                const stickerItem = document.createElement('div');
+                stickerItem.className = 'sticker-item';
+                stickerItem.innerHTML = `
+                    <img src="${sticker.imageUrl}" alt="${sticker.gender} ${sticker.expression} chibi sticker" 
+                        onerror="this.onerror=null;this.src='https://placehold.co/150x150/cccccc/333333?text=Failed+to+Load';">
+                    <p>${sticker.gender.charAt(0).toUpperCase() + sticker.gender.slice(1)} - ${sticker.expression.charAt(0).toUpperCase() + sticker.expression.slice(1)}</p>
+                `;
+                stickerGrid.appendChild(stickerItem);
+            });
+        };
+
+        window.onload = loadStickers;
+    </script>
+</body>
+</html>

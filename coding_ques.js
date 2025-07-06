@@ -1,59 +1,56 @@
-function primeNumber(num) {
-  let i = 2;
+function fibo(num) {
+  let fiboList = [0, 1];
 
-  if (num <= 1) return false;
-
-  while (i * i <= num) {
-    if (num % i === 0) return false;
-    i += 1;
+  for (let i = 2; i < num; i++) {
+    fiboList.push(fiboList[i - 1] + fiboList[i - 2]);
   }
-  return true;
+  return fiboList;
 }
-// console.log(primeNumber(5));
+// console.log(fibo(5));
 
-function findElement(list_1) {
-  let largest = 0,
-    secLargest = 0;
+// Input: [1, [2, [3, [4]]]]
+// Output: [1, 2, 3, 4]
 
-  for (let i = 0; i < list_1.length; i++) {
-    let item = list_1[i];
-    if (largest < item) {
-      secLargest = largest;
-      largest = item;
-    } else if (secLargest < item) {
-      secLargest = item;
+function flatArray(arrList) {
+  let myList = [];
+
+  for (let i in arrList) {
+    if (arrList[i] instanceof Array) {
+      myList = myList.concat(flatArray(arrList[i]));
+    } else {
+      myList.push(arrList[i]);
     }
   }
-  return secLargest;
+  return myList;
 }
-// console.log(findElement([8, 7, 9, 3]));
+// console.log(flatArray([1, [2, [3, [4]]]]));
 
-function findMissing(arrList) {
-  let list1 = [];
-  for (let i = 0; i < arrList.length; i++) {
-    if (arrList[i] > 0) {
-      list1.push(arrList[i]);
-    }
-  }
+// Input: ["eat","tea","tan","ate","nat","bat"]
+// Output: [["eat","tea","ate"],["tan","nat"],["bat"]]
+// Group anagrams from a list of strings
 
-  let highest = 0;
-  for (let i = 0; i <= list1.length; i++) {
-    if (highest < list1[i]) {
-      highest = list1[i];
-    }
-  }
-  console.log(highest);
+// Rotate an array by k steps
+// Input: [1,2,3,4,5], k = 2
+// Output: [4,5,1,2,3]
 
-  let sum1 = 0,
-    sum2 = 0;
-  for (let i = 0; i <= highest; i++) {
-    sum1 += i;
+// Move all zeros to the end of an array
+// Input: [0,1,0,3,12]
+// Output: [1,3,12,0,0]
+
+function* abc(list) {
+  for (let i in list) {
+    yield list[i];
   }
-  for (let i = 0; i < arrList.length; i++) {
-    sum2 += arrList[i];
-  }
-  console.log(sum1);
-  console.log(sum2);
-  return sum1 - sum2;
 }
-// console.log(findMissing([1, 2, 4, 5, 6]));
+const list1 = [1, 2, 3, 4, 5];
+const generator = abc(list1);
+// console.log(generator.next().value);
+// console.log(generator.next().value);
+// console.log(generator.next().value);
+// console.log(generator.next().value);
+
+let value = 0;
+while ((value = 5)) {
+  value = generator.next().value;
+  console.log(value);
+}
