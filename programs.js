@@ -340,12 +340,12 @@ function flattenList(myList) {
   // return myList.flat(Infinity);
 
   let result = [];
-  for (let i = 0; i < arr1.length; i++) {
-    if (arr1[i] instanceof Array) {
+  for (let i = 0; i < myList.length; i++) {
+    if (myList[i] instanceof Array) {
       // recursion
-      result = result.concat(flatArray(arr1[i]));
+      result = result.concat(flatArray(myList[i]));
     } else {
-      result.push(arr1[i]);
+      result.push(myList[i]);
     }
   }
   return result;

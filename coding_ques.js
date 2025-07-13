@@ -37,20 +37,30 @@ function flatArray(arrList) {
 // Input: [0,1,0,3,12]
 // Output: [1,3,12,0,0]
 
-function* abc(list) {
-  for (let i in list) {
-    yield list[i];
-  }
-}
-const list1 = [1, 2, 3, 4, 5];
-const generator = abc(list1);
-// console.log(generator.next().value);
-// console.log(generator.next().value);
-// console.log(generator.next().value);
-// console.log(generator.next().value);
+// function* abc(list) {
+//   for (let i in list) {
+//     yield list[i];
+//   }
+// }
+// const list1 = [1, 2, 3, 4, 5];
+// const generator = abc(list1);
+// // console.log(generator.next().value);
+// // console.log(generator.next().value);
+// // console.log(generator.next().value);
+// // console.log(generator.next().value);
 
-let value = 0;
-while ((value = 5)) {
-  value = generator.next().value;
-  console.log(value);
+// let value = 0;
+// while ((value = 5)) {
+//   value = generator.next().value;
+//   // console.log(value);
+// }
+function palindrome(str) {
+  // let str2 = str.replace(/[^A-Za-z0-9]/g, "").toLocaleLowerCase();
+  let result = "";
+
+  for (let i = str.length - 1; i >= 0; i--) {
+    result += str[i];
+  }
+  return result === str;
 }
+console.log(palindrome("ssmss"));
