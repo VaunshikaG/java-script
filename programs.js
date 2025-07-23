@@ -343,7 +343,7 @@ function flattenList(myList) {
   for (let i = 0; i < myList.length; i++) {
     if (myList[i] instanceof Array) {
       // recursion
-      result = result.concat(flatArray(myList[i]));
+      result = result.concat(flattenList(myList[i]));
     } else {
       result.push(myList[i]);
     }
@@ -428,28 +428,29 @@ for (let a in myarr) {
   }
 }
 // -------------------------------------------------------------------------------
-// implement custom forEach fun
-
-// basic lvl
-Array.prototype.customForEachOne = function (callback) {
-  for (let i = 0; i < this.length; i++) {
-    callback(this[i], this);
-  }
-};
-
-// advc lvl
-Array.prototype.customForEachTwo = function (callback, thisCtx) {
-  if (typeof callback !== "function") {
-    throw `this is not a function`;
-  }
-
-  const length = this.length;
-  let i = 0;
-  while (i < length) {
-    if (this.hasOwnProperty) {
-      callback.call(thisCtx, this[i], i, this);
+// sum of array
+function sumArray(arrList) {
+    let sum = 0;
+    
+    for(let i = 0; i < arrList.length; i++) {
+      // 1st approach
+      const num = Number(arrList[i]);
+      if(!isNaN(num)) {
+        sum += num;
+      }
+      
+      // 2nd approach
+      if(typeof arrList[i] === 'number') {
+          sum +=arrList[i]
+      } else if (typeof arrList[i] === 'string') {
+        let a = Number(arrList[i])
+        sum +=a
+      }
     }
-    i++;
-  }
-};
+    return sum;
+}
+
+const arr11 = [26, 42, 57, 68, '21', 101, '55', 94, 88, '49', null, undefined]
+console.log(sumArray(arr11));
+
 // -------------------------------------------------------------------------------

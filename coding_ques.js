@@ -63,4 +63,13 @@ function palindrome(str) {
   }
   return result === str;
 }
-console.log(palindrome("ssmss"));
+// console.log(palindrome("ssmss"));
+
+
+function abd() {
+  let str = 'adhgsjbf'
+  let  str2 = 12
+  console.log(NaN == NaN);
+  
+}
+abd()
